@@ -1,7 +1,7 @@
 const Item = require("../models/item");
 
 exports.index = (req, res) => {
-  res.send("NOT IMPLEMENTED YET");
+  res.render("index", { title: "Bienvenidos a Music Heaven" });
 };
 
 exports.item_list = (req, res) => {
