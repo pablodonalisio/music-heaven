@@ -1,0 +1,16 @@
+extends layout
+
+block content 
+  h1= title 
+
+  ul.products-list 
+    for item in items 
+      li.card
+        .card-body
+          h5.card-title #{item.name}
+          p.card-text #{item.description}
+          p.card-text $#{item.price}
+          a.btn.btn-primary(href=item.url) Ver Detalle
+    else 
+      li No hay items para mostrar. Agrega items 
+        a(href='/item/create') aqui

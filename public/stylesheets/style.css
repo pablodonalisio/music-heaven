@@ -3,3 +3,13 @@
   padding: 0;
   list-style: none;
 }
+
+.products-list {
+  display: flex;
+  gap: 2rem;
+  flex-wrap: wrap;
+}
+
+.card {
+  width: 18rem;
+}

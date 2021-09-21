@@ -4,8 +4,13 @@ exports.index = (req, res) => {
   res.render("index", { title: "Bienvenidos a Music Heaven" });
 };
 
-exports.item_list = (req, res) => {
-  res.send("NOT IMPLEMENTED YET");
+exports.item_list = (req, res, next) => {
+  Item.find()
+    .populate("category")
+    .exec((err, items) => {
+      if (err) return next(err);
+      res.render("item_list", { title: "Lista de Items", items: items });
+    });
 };
 
 exports.item_detail = (req, res) => {
