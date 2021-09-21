@@ -10,8 +10,8 @@ const ItemSchema = new Schema({
   stock: { type: Number, required: true },
 });
 
-ItemSchema.virtual("url").get(() => {
-  return "item/" + this._id;
+ItemSchema.virtual("url").get(function () {
+  return "/products/item/" + this._id;
 });
 
 module.exports = mongoose.model("Item", ItemSchema);
