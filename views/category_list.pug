@@ -1,0 +1,12 @@
+extends layout 
+
+block content 
+  h1= title 
+
+  ul 
+    for category in categories 
+      li 
+        a(href=category.url) #{category.name} 
+    else 
+      li No hay categorias para mostrar. Agrega una categoría 
+        a(href="/category/create") aqui. 
