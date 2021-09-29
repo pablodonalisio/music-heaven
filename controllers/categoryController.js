@@ -36,7 +36,7 @@ exports.category_detail = (req, res, next) => {
 };
 
 exports.category_create_get = (req, res, next) => {
-  res.render("category_form", { title: "Create Category" });
+  res.render("category_form", { title: "Crear Categoría" });
 };
 
 exports.category_create_post = [
@@ -48,7 +48,7 @@ exports.category_create_post = [
 
     if (!errors.isEmpty()) {
       res.render("category_form", {
-        title: "Create Category",
+        title: "Crear Categoría",
         category: category,
         errors: errors.array(),
       });
@@ -69,18 +69,24 @@ exports.category_create_post = [
   },
 ];
 
-exports.category_delete_get = (req, res) => {
-  res.send("NOT IMPLEMENTED YET");
+exports.category_delete_get = (req, res, next) => {
+  Category.findById(req.params.id).exec((err, category) => {
+    if (err) return next(err);
+    res.render("category_delete", { title: "Borrar Categoría", category });
+  });
 };
 
-exports.category_delete_post = (req, res) => {
-  res.send("NOT IMPLEMENTED YET");
+exports.category_delete_post = (req, res, next) => {
+  Category.findByIdAndRemove(req.body.categoryid, function deleteCategory(err) {
+    if (err) return next(err);
+    res.redirect("/products/categories");
+  });
 };
 
 exports.category_update_get = (req, res, next) => {
   Category.findById(req.params.id).exec((err, category) => {
     if (err) return next(err);
-    res.render("category_form", { title: "Update Category", category });
+    res.render("category_form", { title: "Editar Categoría", category });
   });
 };
 
@@ -93,7 +99,7 @@ exports.category_update_post = [
 
     if (!errors.isEmpty()) {
       res.render("category_form", {
-        title: "Create Category",
+        title: "Editar Categoría",
         category: category,
         errors: errors.array(),
       });
