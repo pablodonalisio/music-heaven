@@ -79,12 +79,18 @@ exports.item_create_post = [
   },
 ];
 
-exports.item_delete_get = (req, res) => {
-  res.send("NOT IMPLEMENTED YET");
+exports.item_delete_get = (req, res, next) => {
+  Item.findById(req.params.id).exec((err, item) => {
+    if (err) return next(err);
+    res.render("item_delete", { title: "Borrar Item", item });
+  });
 };
 
-exports.item_delete_post = (req, res) => {
-  res.send("NOT IMPLEMENTED YET");
+exports.item_delete_post = (req, res, next) => {
+  Item.findByIdAndRemove(req.body.itemid, function deleteItem(err) {
+    if (err) return next(err);
+    res.redirect("/products/items");
+  });
 };
 
 exports.item_update_get = (req, res, next) => {
