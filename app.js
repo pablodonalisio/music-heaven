@@ -1,5 +1,6 @@
 var createError = require("http-errors");
 var express = require("express");
+require("dotenv").config();
 var path = require("path");
 var cookieParser = require("cookie-parser");
 var logger = require("morgan");
@@ -11,8 +12,7 @@ var productsRouter = require("./routes/products");
 var app = express();
 
 const mongoose = require("mongoose");
-const mongoDb =
-  "mongodb+srv://pablo_donalisio:siWh4UMKMXTfaxbW@cluster0.fslcb.mongodb.net/music_heaven_development?retryWrites=true&w=majority";
+const mongoDb = process.env.MONGO_URL;
 mongoose.connect(mongoDb, { useNewUrlParser: true, useUnifiedTopology: true });
 const db = mongoose.connection;
 db.on("error", console.error.bind(console, "MongoDB connection error:"));
